@@ -57,11 +57,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Vitor Reis Blog`,
+        short_name: `Vitor Reis`,
         start_url: `/`,
         background_color: `#ffffff`,
-        theme_color: `#663399`,
+        theme_color: `#209CEE`,
         display: `minimal-ui`,
         icon: `content/assets/vitor-reis-icon-512x512.png`,
       },
