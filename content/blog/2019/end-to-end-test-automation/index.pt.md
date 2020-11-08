@@ -5,54 +5,53 @@ description:
 langs: ['en', 'pt']
 ---
 
-Manual testing is by far one of the most painful things in the software development lifecycle, as your products evolve and more functionality is added codebases tends to grow, if your product is being successful the team may grow as well and with it the risk of introducing a regression is even higher.
+Testes manuais é uma das coisas mais dolorosas no ciclo de vida de desenvolvimento de software, conforme os produtos evolvem a emais functionalidades são adicionadas o tamanho do código fonte tende a crescer, se o seu produto está tendo sucesso o seu time pode crescer e com isso o risco de introduzir regressões é ainda maior.
 
+## O que faz um biblioteca de testes ser boa?
+Em poucas palavras, deve ser simples de:
+- Configurar testes
+- Escrever testes
+- Executar testes
+- Depurar
 
-## What makes a test framework good?
-In a few words, it must be simple for:
-- Setting up tests
-- Writing tests
-- Running tests
-- Debugging
+## Estrategias para testes
 
-## Strategies for testing
-
-There are many strategies for test automation out there, the main ones usually being:
+Existem muitas estrategias para automação de testes, as mais populares sendo:
 
 #### 1. Stub Requests
 Pros
-- Fast / Easy / Flexible
-- No Server / DB
+- Rápido / fácil e flexível
+- Não depende de servidores ou banco de dados
 
-Cons
-- Not True E2E
-- Require Fixtures
+Contras
+- Não é "e2e" de verdade
+- Precisa "Fixtures"
 
 #### 2. Static User
 Pros
-- Real Session E2E
+- Realmente cria uma sessão E2E
 
-Cons
-- Requires Server
-- Seed the DB
-- Shares Test State
+Contras
+- Precisa de servidor
+- Inicialização de banco de dados
+- Testes compartilham estado
 
 #### 3. Dynamic User
 Pros
-- No State mutation
-- Flexible / Powerful
+- Não existe mutação de estado
+- Flexível / Poderosa
 
-Cons
-- DB Setup / Teardown
-- Slow / Complex
+Contras
+- Configuração de banco de dados / Remoção
+- Devagar / Complexa
 
-## The Cypress solution for it
+## A Solução da biblioteca Cypress
 
-In 2019 I gave a talk for the React Berlin community in which under 25 minutes we discussed common problems, solutions and how Cypress can allow you implementing test automation for web apps in a fast, easy and maintainable way.
+Em 2019 eu dei uma palestra para a comunidade de React de Berlim em que em menos de 25 minutos eu discuti problemas comuns, soluções e como Cypress permite você implementar automação "e2e" para aplicações web de um jeito simples, rápido e facíl de dar manutenção.
 
 [![End to End automation testing with Cypress – Vitor Reis](./youtube_preview.png)](https://www.youtube.com/watch?v=vSFTpcxmAYQ)
 Video: Test automation with cypress, React Berlin November, 2019
 
-## References
+## Referências
 - Cypress - [Test a React Todo App](https://docs.cypress.io/examples/examples/tutorials.html#Test-a-React-Todo-App)
 - Brian Mann – [I see your point, but…  - AssertJS 2018](https://www.youtube.com/watch?v=5XQOK0v_YRE)
