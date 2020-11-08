@@ -2,6 +2,7 @@
 title: Implementing Scrum - A case study
 date: "2019-08-18T22:12:03.284Z"
 description: "How changing our product/software development process completely changed the team engament and results"
+langs: ['en']
 ---
 
 ## Background

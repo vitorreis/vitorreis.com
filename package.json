@@ -36,7 +36,9 @@
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
+    "gatsby-plugin-i18n": "^1.0.1",
     "gh-pages": "^2.0.1",
+    "lodash": "^4.17.20",
     "prettier": "^1.17.1"
   },
   "homepage": "https://github.com/vitorreis/vitorreis.com#readme",

@@ -1,7 +1,7 @@
 ---
-title: End to End test automation for web apps
+title: Automação de testes para aplicações web
 date: "2019-11-21T22:12:03.284Z"
-description: "It's here. Test automation made simple."
+description: 
 langs: ['en', 'pt']
 ---
 

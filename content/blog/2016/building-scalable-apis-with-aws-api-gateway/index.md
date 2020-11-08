@@ -2,6 +2,7 @@
 title: Building Scalable APIs with AWS API Gateway
 date: "2016-09-16T22:12:03.284Z"
 description: "There is a lot of excitement around serverless architecture and it is for a good reason, abstracting the tedious details of configuration and management of your architecture can make a lot of sense for the right application, the AWS API gateway is one of the several tools that allow you this."
+langs: ['en']
 ---
 > Originally published at [foodora/foodpanda tech blog](https://tech.foodora.com/building-scalable-apis-with-aws-api-gateway)
 

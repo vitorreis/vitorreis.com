@@ -5,12 +5,18 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { rhythm, scale } from "../utils/typography"
+import { codeToLanguage, createLanguageLink } from '../utils/i18n'
 
 class BlogPostTemplate extends React.Component {
   render() {
     const post = this.props.data.markdownRemark
     const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
+    const { previous, next, slug } = this.props.pageContext
+    const lang = post.fields.langKey
+    const translations = (post.frontmatter.langs || [])
+      .filter(l => l !== 'en')
+
+    const languageLink = createLanguageLink(slug, lang)
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
@@ -29,6 +35,29 @@ class BlogPostTemplate extends React.Component {
         >
           {post.frontmatter.date}
         </p>
+        {translations.length > 0 &&
+          <>
+            {(translations.length > 1 || lang === 'en') &&
+              <p><i>This article is also available into {translations
+                .map((l, i) => (
+                  <React.Fragment key={l}>
+                    {l === lang ?
+                      <b>{codeToLanguage(l)}</b> :
+                      <Link to={languageLink(l)}>{codeToLanguage(l)}</Link>
+                    }
+                    {i === translations.length - 1 ? '' : (i === translations.length - 2 ? (i === 0 ? ' and ' : ', and ') : ', ')}
+                  </React.Fragment>
+                ))
+              }.
+              </i></p>
+            }
+            {lang !== 'en' &&
+              <p><i>
+                You can also <Link to={languageLink('en')}>read the original in English</Link>
+              </i></p>
+            }
+          </>
+        }
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
         <hr
           style={{
@@ -84,6 +113,11 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        langs
+      }
+      fields {
+        slug
+        langKey
       }
     }
   }
