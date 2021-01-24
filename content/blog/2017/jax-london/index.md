@@ -2,6 +2,7 @@
 title: Jax London 2017 - Conference Highlights
 date: "2017-10-15T22:12:03.284Z"
 description: "In October 2017 some of the top tech companies got together in the JAX London a conference about JAVA, microservices, continuous delivery and DevOps, and foodora tech was also there to check the latest releases and trends for the future of JAVA."
+langs: ['en']
 ---
 > Originally published at [foodora/foodpanda tech blog](https://tech.foodora.com/jax-london-2017/)
 

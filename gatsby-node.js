@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const path = require(`path`)
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -16,6 +17,7 @@ exports.createPages = ({ graphql, actions }) => {
             node {
               fields {
                 slug
+                langKey
               }
               frontmatter {
                 title
@@ -32,10 +34,14 @@ exports.createPages = ({ graphql, actions }) => {
 
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
-
-    posts.forEach((post, index) => {
-      const previous = index === posts.length - 1 ? null : posts[index + 1].node
-      const next = index === 0 ? null : posts[index - 1].node
+    const defaultLangKey = 'en'
+    
+    const defaultLangPosts = posts.filter(
+      ({ node }) => node.fields.langKey === defaultLangKey
+    )
+    _.each(defaultLangPosts, (post, index) => {
+      const previous = index === defaultLangPosts.length - 1 ? null : defaultLangPosts[index + 1].node;
+      const next = index === 0 ? null : defaultLangPosts[index - 1].node;
 
       createPage({
         path: post.node.fields.slug,
@@ -46,6 +52,15 @@ exports.createPages = ({ graphql, actions }) => {
           next,
         },
       })
+
+      const otherLangPosts = posts.filter(
+        ({ node }) => node.fields.langKey !== defaultLangKey
+      )
+      _.each(otherLangPosts, (post) => createPage({
+        path: post.node.fields.slug,
+        component: blogPost,
+        context: { slug: post.node.fields.slug },
+      }))
     })
 
     return null
@@ -55,7 +70,10 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (
+    node.internal.type === `MarkdownRemark` &&
+    node.internal.fieldOwners.slug !== 'gatsby-plugin-i18n'
+  ) {
     const value = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,

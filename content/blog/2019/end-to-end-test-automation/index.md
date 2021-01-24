@@ -2,6 +2,7 @@
 title: End to End test automation for web apps
 date: "2019-11-21T22:12:03.284Z"
 description: "It's here. Test automation made simple."
+langs: ['en', 'pt']
 ---
 
 Manual testing is by far one of the most painful things in the software development lifecycle, as your products evolve and more functionality is added codebases tends to grow, if your product is being successful the team may grow as well and with it the risk of introducing a regression is even higher.

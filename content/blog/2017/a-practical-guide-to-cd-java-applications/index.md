@@ -2,6 +2,7 @@
 title: A Practical guide to CD Java Applications
 date: "2017-10-19T22:12:03.284Z"
 description: "At JAX London 2017 there was an interesting talk about the state of the art on CD for Java Apps"
+langs: ['en']
 ---
 
 At JAX London a few weeks ago I attended the talk of [@danielbryantuk](https://twitter.com/danielbryantuk) about Continuous Delivery With Containers, where he gave a few samples of his book [Containerizing Continuous Delivery in Java](https://www.nginx.com/resources/library/containerizing-continuous-delivery-java/) (get a free copy on the link).
