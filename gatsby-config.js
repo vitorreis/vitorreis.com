@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: `https://vitorreis.com/`,
     social: {
       twitter: `vitorreisdev`,
+      linkedIn: `in/vitor-dos-reis/`,
     },
   },
   plugins: [

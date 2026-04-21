@@ -18,6 +18,7 @@ function Bio() {
           description
           social {
             twitter
+            linkedIn
           }
         }
       }
@@ -50,8 +51,8 @@ function Bio() {
       <p>
         {description}
         {` `}
-        <a href={`https://twitter.com/${social.twitter}`}>
-          Follow me on Twitter
+        <a href={`https://linkedin.com/${social.linkedIn}`}>
+          Follow me on LinkedIn
         </a>
       </p>
     </div>
