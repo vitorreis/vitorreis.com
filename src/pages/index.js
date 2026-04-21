@@ -15,7 +15,6 @@ class BlogIndex extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO title="All posts" />
         <Bio />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
@@ -46,6 +45,10 @@ class BlogIndex extends React.Component {
 
 export default BlogIndex
 
+export function Head() {
+  return <SEO title="All posts" />
+}
+
 export const pageQuery = graphql`
   query {
     site {
@@ -53,7 +56,7 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
       edges {
         node {
           excerpt

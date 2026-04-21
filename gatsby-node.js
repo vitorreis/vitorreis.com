@@ -1,6 +1,6 @@
-const _ = require('lodash');
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+
+const CONTENT_DIR = `${__dirname}/content/blog`
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -10,7 +10,7 @@ exports.createPages = ({ graphql, actions }) => {
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: DESC }
+          sort: { frontmatter: { date: DESC } }
           limit: 1000
         ) {
           edges {
@@ -35,11 +35,11 @@ exports.createPages = ({ graphql, actions }) => {
     // Create blog posts pages.
     const posts = result.data.allMarkdownRemark.edges
     const defaultLangKey = 'en'
-    
+
     const defaultLangPosts = posts.filter(
       ({ node }) => node.fields.langKey === defaultLangKey
     )
-    _.each(defaultLangPosts, (post, index) => {
+    defaultLangPosts.forEach((post, index) => {
       const previous = index === defaultLangPosts.length - 1 ? null : defaultLangPosts[index + 1].node;
       const next = index === 0 ? null : defaultLangPosts[index - 1].node;
 
@@ -56,7 +56,7 @@ exports.createPages = ({ graphql, actions }) => {
       const otherLangPosts = posts.filter(
         ({ node }) => node.fields.langKey !== defaultLangKey
       )
-      _.each(otherLangPosts, (post) => createPage({
+      otherLangPosts.forEach((post) => createPage({
         path: post.node.fields.slug,
         component: blogPost,
         context: { slug: post.node.fields.slug },
@@ -67,18 +67,22 @@ exports.createPages = ({ graphql, actions }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
-  if (
-    node.internal.type === `MarkdownRemark` &&
-    node.internal.fieldOwners.slug !== 'gatsby-plugin-i18n'
-  ) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
+  if (node.internal.type !== `MarkdownRemark`) return
+
+  const relativePath = node.fileAbsolutePath.replace(CONTENT_DIR, '')
+  // e.g. /2019/my-post/index.pt.md  or  /2019/my-post/index.md
+  const segments = relativePath.split('/')
+  const fileName = segments.pop()          // 'index.pt.md' or 'index.md'
+  const dirPath = segments.join('/') + '/' // '/2019/my-post/'
+
+  const parts = fileName.split('.')
+  // ['index','pt','md'] (translated) or ['index','md'] (default)
+  const langKey = parts.length === 3 ? parts[1] : 'en'
+  const slug = langKey !== 'en' ? `/${langKey}${dirPath}` : dirPath
+
+  createNodeField({ name: `slug`, node, value: slug })
+  createNodeField({ name: `langKey`, node, value: langKey })
 }

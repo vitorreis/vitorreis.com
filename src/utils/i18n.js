@@ -5,9 +5,9 @@ export const codeToLanguage = (code) => ({
   }[code])
   
   export const createLanguageLink = (slug, lang) => {
-    const rawSlug = slug.replace(`${lang}/`, '')
-  
+    const rawSlug = lang !== 'en' ? slug.replace(`/${lang}`, '') : slug
+
     return (targetLang) => targetLang === 'en'
       ? rawSlug
-      : `${targetLang}/${rawSlug}`
+      : `/${targetLang}${rawSlug}`
   }

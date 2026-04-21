@@ -20,10 +20,6 @@ class BlogPostTemplate extends React.Component {
 
     return (
       <Layout location={this.props.location} title={siteTitle}>
-        <SEO
-          title={post.frontmatter.title}
-          description={post.frontmatter.description || post.excerpt}
-        />
         <h1>{post.frontmatter.title}</h1>
         <p
           style={{
@@ -96,6 +92,16 @@ class BlogPostTemplate extends React.Component {
 }
 
 export default BlogPostTemplate
+
+export function Head({ data }) {
+  const post = data.markdownRemark
+  return (
+    <SEO
+      title={post.frontmatter.title}
+      description={post.frontmatter.description || post.excerpt}
+    />
+  )
+}
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
